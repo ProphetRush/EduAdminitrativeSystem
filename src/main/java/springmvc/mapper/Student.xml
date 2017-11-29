@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springmvc.mapper.StudentMapper">
+    <insert id="add" parameterType="Student" >
+        insert into student (ID, name, dept_name, tot_cred) VALUES (${ID}, ${name}, ${dept_name}, ${tot_cred})
+    </insert>
+
+    <delete id="delete" parameterType="Student" >
+        delete from student where ID= #{ID}
+    </delete>
+
+    <select id="get" parameterType="string" resultType="Student">
+        select * from student where ID= #{ID}
+    </select>
+
+    <update id="update" parameterType="Student" >
+        update student set name=#{name}, dept_name=#{dept_name}, tot_cred=#{tot_cred} where ID=#{ID}
+    </update>
+
+</mapper>

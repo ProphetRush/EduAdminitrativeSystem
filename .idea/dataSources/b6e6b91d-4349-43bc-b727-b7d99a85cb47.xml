@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="university@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="university">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="qa_robot_database"/>
+    <schema id="7" parent="1" name="sakila"/>
+    <schema id="8" parent="1" name="server"/>
+    <schema id="9" parent="1" name="sys"/>
+    <schema id="10" parent="1" name="world"/>
+    <table id="11" parent="2" name="advisor"/>
+    <table id="12" parent="2" name="classroom"/>
+    <table id="13" parent="2" name="course"/>
+    <table id="14" parent="2" name="department"/>
+    <table id="15" parent="2" name="instructor"/>
+    <table id="16" parent="2" name="prereq"/>
+    <table id="17" parent="2" name="section"/>
+    <table id="18" parent="2" name="student"/>
+    <table id="19" parent="2" name="takes"/>
+    <table id="20" parent="2" name="teaches"/>
+    <table id="21" parent="2" name="time_slot"/>
+    <column id="22" parent="11" name="s_ID">
+      <Position>1</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="11" name="i_ID">
+      <Position>2</Position>
+      <DataType>varchar(5)|0</DataType>
+    </column>
+    <index id="24" parent="11" name="i_ID">
+      <ColNames>i_ID</ColNames>
+    </index>
+    <key id="25" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>s_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="26" parent="11" name="advisor_ibfk_2">
+      <ColNames>s_ID</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>student</RefTableName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="27" parent="11" name="advisor_ibfk_1">
+      <ColNames>i_ID</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>instructor</RefTableName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="28" parent="12" name="building">
+      <Position>1</Position>
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="12" name="room_number">
+      <Position>2</Position>
+      <DataType>varchar(7)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="12" name="capacity">
+      <Position>3</Position>
+      <DataType>decimal(4)|0</DataType>
+    </column>
+    <key id="31" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>building
+room_number</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="32" parent="13" name="course_id">
+      <Position>1</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="13" name="title">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="34" parent="13" name="dept_name">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="35" parent="13" name="credits">
+      <Position>4</Position>
+      <DataType>decimal(2)|0</DataType>
+    </column>
+    <index id="36" parent="13" name="dept_name">
+      <ColNames>dept_name</ColNames>
+    </index>
+    <key id="37" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>course_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="38" parent="13" name="course_ibfk_1">
+      <ColNames>dept_name</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>department</RefTableName>
+      <RefColNames>dept_name</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="39" parent="14" name="dept_name">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="14" name="building">
+      <Position>2</Position>
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <column id="41" parent="14" name="budget">
+      <Position>3</Position>
+      <DataType>decimal(12,2)|0</DataType>
+    </column>
+    <key id="42" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>dept_name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="43" parent="15" name="ID">
+      <Position>1</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="15" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="15" name="dept_name">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="46" parent="15" name="salary">
+      <Position>4</Position>
+      <DataType>decimal(8,2)|0</DataType>
+    </column>
+    <index id="47" parent="15" name="dept_name">
+      <ColNames>dept_name</ColNames>
+    </index>
+    <key id="48" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="49" parent="15" name="instructor_ibfk_1">
+      <ColNames>dept_name</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>department</RefTableName>
+      <RefColNames>dept_name</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="50" parent="16" name="course_id">
+      <Position>1</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="16" name="prereq_id">
+      <Position>2</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="52" parent="16" name="prereq_id">
+      <ColNames>prereq_id</ColNames>
+    </index>
+    <key id="53" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>course_id
+prereq_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="54" parent="16" name="prereq_ibfk_1">
+      <ColNames>course_id</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>course_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="55" parent="16" name="prereq_ibfk_2">
+      <ColNames>prereq_id</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>course_id</RefColNames>
+    </foreign-key>
+    <column id="56" parent="17" name="course_id">
+      <Position>1</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="17" name="sec_id">
+      <Position>2</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="17" name="semester">
+      <Position>3</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="17" name="year">
+      <Position>4</Position>
+      <DataType>decimal(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="17" name="building">
+      <Position>5</Position>
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <column id="61" parent="17" name="room_number">
+      <Position>6</Position>
+      <DataType>varchar(7)|0</DataType>
+    </column>
+    <column id="62" parent="17" name="time_slot_id">
+      <Position>7</Position>
+      <DataType>varchar(4)|0</DataType>
+    </column>
+    <index id="63" parent="17" name="building">
+      <ColNames>building
+room_number</ColNames>
+    </index>
+    <key id="64" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>course_id
+sec_id
+semester
+year</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="65" parent="17" name="section_ibfk_1">
+      <ColNames>course_id</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>course_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="66" parent="17" name="section_ibfk_2">
+      <ColNames>building
+room_number</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>classroom</RefTableName>
+      <RefColNames>building
+room_number</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="67" parent="18" name="ID">
+      <Position>1</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="68" parent="18" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="69" parent="18" name="dept_name">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="70" parent="18" name="tot_cred">
+      <Position>4</Position>
+      <DataType>decimal(3)|0</DataType>
+    </column>
+    <index id="71" parent="18" name="dept_name">
+      <ColNames>dept_name</ColNames>
+    </index>
+    <key id="72" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="73" parent="18" name="student_ibfk_1">
+      <ColNames>dept_name</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>department</RefTableName>
+      <RefColNames>dept_name</RefColNames>
+      <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <column id="74" parent="19" name="ID">
+      <Position>1</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="19" name="course_id">
+      <Position>2</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="19" name="sec_id">
+      <Position>3</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="19" name="semester">
+      <Position>4</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="19" name="year">
+      <Position>5</Position>
+      <DataType>decimal(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="19" name="grade">
+      <Position>6</Position>
+      <DataType>varchar(2)|0</DataType>
+    </column>
+    <index id="80" parent="19" name="course_id">
+      <ColNames>course_id
+sec_id
+semester
+year</ColNames>
+    </index>
+    <key id="81" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID
+course_id
+sec_id
+semester
+year</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="82" parent="19" name="takes_ibfk_2">
+      <ColNames>ID</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>student</RefTableName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="83" parent="19" name="takes_ibfk_1">
+      <ColNames>course_id
+sec_id
+semester
+year</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>section</RefTableName>
+      <RefColNames>course_id
+sec_id
+semester
+year</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="84" parent="20" name="ID">
+      <Position>1</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="85" parent="20" name="course_id">
+      <Position>2</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="86" parent="20" name="sec_id">
+      <Position>3</Position>
+      <DataType>varchar(8)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="87" parent="20" name="semester">
+      <Position>4</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="88" parent="20" name="year">
+      <Position>5</Position>
+      <DataType>decimal(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="89" parent="20" name="course_id">
+      <ColNames>course_id
+sec_id
+semester
+year</ColNames>
+    </index>
+    <key id="90" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID
+course_id
+sec_id
+semester
+year</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="91" parent="20" name="teaches_ibfk_2">
+      <ColNames>ID</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>instructor</RefTableName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="92" parent="20" name="teaches_ibfk_1">
+      <ColNames>course_id
+sec_id
+semester
+year</ColNames>
+      <RefSchemaName>university</RefSchemaName>
+      <RefTableName>section</RefTableName>
+      <RefColNames>course_id
+sec_id
+semester
+year</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="93" parent="21" name="time_slot_id">
+      <Position>1</Position>
+      <DataType>varchar(4)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="94" parent="21" name="day">
+      <Position>2</Position>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="95" parent="21" name="start_hr">
+      <Position>3</Position>
+      <DataType>decimal(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="96" parent="21" name="start_min">
+      <Position>4</Position>
+      <DataType>decimal(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="21" name="end_hr">
+      <Position>5</Position>
+      <DataType>decimal(2)|0</DataType>
+    </column>
+    <column id="98" parent="21" name="end_min">
+      <Position>6</Position>
+      <DataType>decimal(2)|0</DataType>
+    </column>
+    <key id="99" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>time_slot_id
+day
+start_hr
+start_min</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

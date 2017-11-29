@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springmvc.mapper.CourseMapper">
+    <insert id="add" parameterType="springmvc.pojo.Course" >
+        insert into course (course_id, title, dept_name, credits) VALUES (${course_id}, ${title}, ${dept_name}, ${credits})
+    </insert>
+
+    <delete id="delete" parameterType="springmvc.pojo.Course" >
+        delete from course where course_id= #{course_id}
+    </delete>
+
+    <select id="get" parameterType="string" resultType="springmvc.pojo.Course">
+        select * from   course  where course_id= #{course_id}
+    </select>
+
+    <update id="update" parameterType="springmvc.pojo.Course" >
+        update course set title=#{title}, dept_name=#{dept_name}, $credits=#{credits} where course_id=#{course_id}
+    </update>
+
+    <select id="query" resultType="springmvc.pojo.Course">
+        select * from course
+        <where>
+
+            <if test="course_id != ''">
+                and course_id= #{course_id}
+            </if>
+            <if test="title != ''">
+                and title like concat('%', #{title}, '%')
+            </if>
+            <if test="dept_name != ''">
+                and dept_name = #{dept_name}
+            </if>
+            <if test="credits != -631607793">
+                and credits = #{credits}
+            </if>
+
+            <if test="course_id == '' and title == '' and dept_name == '' and credits == -631607793">
+                and course_id>1
+            </if>
+
+        </where>
+    </select>
+</mapper>

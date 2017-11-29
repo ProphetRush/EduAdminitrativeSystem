@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springmvc.mapper.TeachesMapper">
+
+    <select id="getTeacherID" parameterType="string" resultType="string">
+        select ID from   teaches  where course_id=${course_id} and sec_id= #{sec_id} and semester = #{semester} and year = #{year} limit 0,1
+    </select>
+
+</mapper>
