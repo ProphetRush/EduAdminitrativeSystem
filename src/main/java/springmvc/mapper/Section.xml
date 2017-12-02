@@ -9,4 +9,33 @@
         select * from   section  where course_id=${course_id} and sec_id= #{sec_id} and semester = #{semester} and year = #{year} limit 0,1
     </select>
 
+
+    <select id="querySection" parameterType="string" resultType="Section">
+        SELECT c.course_id, c.title, c.dept_name, c.credits, s.semester, s.building, s.room_number, s.time_slot_id, s.instructor_id FROM course c join section s on c.course_id = s.course_id
+        <where>
+            <if test="course_id != ''">
+                and c.course_id= #{course_id}
+            </if>
+            <if test="title != ''">
+                and c.title like concat('%', #{title}, '%')
+            </if>
+            <if test="dept_name != ''">
+                and c.dept_name = #{dept_name}
+            </if>
+            <if test="credits != -631607793">
+                and c.credits = #{credits}
+            </if>
+            <if test="instructor_id != ''">
+                and s.instructor_id = #{instructor_id}
+            </if>
+            <if test="time != ''">
+                and s.time_slot_id = #{time}
+            </if>
+            <if test="course_id == '' and title == '' and dept_name == '' and credits == -631607793 and instructor_id == '' and time == ''">
+                and s.course_id>1
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

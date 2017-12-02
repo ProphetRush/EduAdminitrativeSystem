@@ -22,14 +22,14 @@ public class CourseController {
     CourseService courseService;
 
 
-    @RequestMapping("/listCourse")
-    public ModelAndView listCourse(){
-        ModelAndView mav = new ModelAndView();
-        List<Course> cs = courseService.list();
-        mav.addObject("cs", cs);
-        mav.setViewName("listCourse");
-        return mav;
-    }
+//    @RequestMapping("/listCourse")
+//    public ModelAndView listCourse(){
+//        ModelAndView mav = new ModelAndView();
+//        List<Course> cs = courseService.list();
+//        mav.addObject("cs", cs);
+//        mav.setViewName("listCourse");
+//        return mav;
+//    }
 
     @RequestMapping("/getCourse")
     public ModelAndView queryCourse(String course_id, String title, String dept_name, String credits, Page page, HttpServletRequest request) {

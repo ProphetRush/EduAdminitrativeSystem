@@ -29,8 +29,6 @@ public class LoginController {
     @Autowired
     InstructorService instructorService;
 
-    @Autowired
-    TeachesService teachesService;
 
     @Autowired
     SectionService sectionService;

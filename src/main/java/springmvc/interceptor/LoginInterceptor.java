@@ -12,7 +12,7 @@ public class LoginInterceptor implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String url = httpServletRequest.getRequestURI();
         HttpSession session = httpServletRequest.getSession();
-        if(url.contains("login") || url.contains("Login")) return true;
+        if(url.contains("login") || url.contains("Login") || url.contains("favicon")) return true;
         else session.setAttribute("goto", url);
         if(session.getAttribute("stuID") != null && session.getAttribute("stuName") != null){
             return true;

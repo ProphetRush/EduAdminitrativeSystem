@@ -10,6 +10,16 @@ public class Course {
     private String Classroom;
     private String Time;
 
+    public String getGrade() {
+        return Grade;
+    }
+
+    public void setGrade(String grade) {
+        Grade = grade;
+    }
+
+    private String Grade;
+
     public String getCourse_id() {
         return course_id;
     }

@@ -17,9 +17,10 @@
         <p>Student ID: ${student.ID}</p>
         <p>Department: ${student.dept_name}</p>
         <p>Total Credit: ${student.tot_cred}</p>
+        <p>You've complete ${creditSum} credits.</p>
     </div>
     <div style="text-align: center">
-        <p>The courses you selected:</p>
+        <p>The courses you've selected:</p>
         <table align='center' border='1' cellspacing='0'>
             <tr>
                 <th>ID</th>
@@ -27,7 +28,7 @@
                 <th>Department</th>
                 <th>Credits</th>
                 <th>Instructor</th>
-                <th>Classroom</th>
+                <th>Grade</th>
             </tr>
             <c:forEach items="${courses}" var="c" varStatus="st">
                 <tr>
@@ -36,7 +37,7 @@
                     <td>${c.dept_name}</td>
                     <td>${c.credits}</td>
                     <td>${c.instructor}</td>
-                    <td>${c.classroom}</td>
+                    <td>${c.grade}</td>
                 </tr>
             </c:forEach>
         </table>

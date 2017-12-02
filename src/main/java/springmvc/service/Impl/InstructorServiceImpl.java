@@ -15,4 +15,9 @@ public class InstructorServiceImpl implements InstructorService{
     public Instructor get(String ID) {
         return instructorMapper.get(ID);
     }
+
+    @Override
+    public String getInstructorID(String instructor_name) {
+        return instructorMapper.getInstructorID(instructor_name);
+    }
 }

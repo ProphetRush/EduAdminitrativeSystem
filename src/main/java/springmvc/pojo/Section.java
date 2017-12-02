@@ -8,6 +8,72 @@ public class Section {
     private String building;
     private String room_number;
     private String timeSlotId;
+    private String instructor_id;
+    private String dept_name;
+    private String title;
+    private String instructor_name;
+
+    public String getDept_name() {
+        return dept_name;
+    }
+
+    public String getInstructor_name() {
+        return instructor_name;
+    }
+
+    public void setInstructor_name(String instructor_name) {
+        this.instructor_name = instructor_name;
+    }
+
+    public String getTitle() {
+
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDept_name(String dept_name) {
+        this.dept_name = dept_name;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public String getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+
+    public String getTime_slot_id() {
+        return time_slot_id;
+    }
+
+    public void setTime_slot_id(String time_slot_id) {
+        this.time_slot_id = time_slot_id;
+    }
+
+    private int credits;
+    private String instructor;
+    private String time_slot_id;
+
+
+    public String getInstructor_id() {
+        return instructor_id;
+    }
+
+    public void setInstructor_id(String instructor_id) {
+        this.instructor_id = instructor_id;
+    }
 
     public String getCourse_id() {
         return course_id;

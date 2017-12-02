@@ -11,4 +11,5 @@ public interface InstructorMapper {
     public Instructor get(String ID);
     public void update(Instructor instructor);
     public int count();
+    public String getInstructorID(String instructor_name);
 }
