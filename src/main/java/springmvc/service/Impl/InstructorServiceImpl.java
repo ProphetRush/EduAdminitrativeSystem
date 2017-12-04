@@ -6,6 +6,8 @@ import springmvc.mapper.InstructorMapper;
 import springmvc.pojo.Instructor;
 import springmvc.service.InstructorService;
 
+import java.util.List;
+
 @Service
 public class InstructorServiceImpl implements InstructorService{
     @Autowired
@@ -19,5 +21,10 @@ public class InstructorServiceImpl implements InstructorService{
     @Override
     public String getInstructorID(String instructor_name) {
         return instructorMapper.getInstructorID(instructor_name);
+    }
+
+    @Override
+    public List<String> getAllInstructorIDByDept(String dept_name) {
+        return instructorMapper.getAllInstructorIDByDept(dept_name);
     }
 }

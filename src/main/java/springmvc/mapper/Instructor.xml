@@ -13,4 +13,8 @@
     <select id="getInstructorID" parameterType="string" resultType="string">
         SELECT ID from instructor WHERE  name=#{instructor_name} limit 0,1
     </select>
+
+    <select id="getAllInstructorIDByDept" resultType="string">
+        SELECT ID from instructor where dept_name=#{dept_name}
+    </select>
 </mapper>

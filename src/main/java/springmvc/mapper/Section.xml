@@ -37,5 +37,15 @@
         </where>
     </select>
 
+    <select id="getAllRoomNumbers" resultType="string">
+        SELECT room_number from classroom
+    </select>
 
+    <select id="getRoomNumberByBuilding" resultType="string">
+        SELECT room_number from classroom where building=#{building}
+    </select>
+
+    <select id="getSecIDByCourse" resultType="int">
+        SELECT count(*) from section WHERE  course_id = #{course_id}
+    </select>
 </mapper>

@@ -43,4 +43,16 @@
 
         </where>
     </select>
+    
+    <select id="getAllCoursesID" resultType="string">
+        SELECT course_id from course
+    </select>
+
+    <insert id="AddCourse">
+        INSERT INTO section VALUES (#{cid}, #{sid}, #{semester}, #{year}, #{building}, #{rn}, #{tid}, #{iid})
+    </insert>
+
+    <select id="getDeptNameByCourseID" resultType="string">
+        SELECT  dept_name from course where course_id=#{course_id}
+    </select>
 </mapper>
