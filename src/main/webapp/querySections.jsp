@@ -11,12 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="queryCourse">
+    <form action="querySections">
         course id:<input type="text" name="course_id" value=""><br>
         course name:<input type="text" name="title" value=""><br>
         credits<input type="text" name="credits" value=""><br>
         department:<input type="text" name="dept_name" value=""><br>
-        instructor:<input type="text" name="instructor_id">
+        instructor:<input type="text" name="instructor_name">
         time:<input type="text" name="time">
         <input type="submit" value="Query"><br>
     </form>

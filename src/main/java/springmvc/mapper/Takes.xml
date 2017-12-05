@@ -9,12 +9,18 @@
     </insert>
 
     <delete id="delete" parameterType="Takes" >
-        delete from takes where ID= #{ID} and course_id = #{course_id} and sec_id = #{sec_id} and semester=${semester} and year = #{year}
+        delete from takes where ID= #{ID} and course_id = #{course_id} and sec_id = #{sec_id} and semester = #{semester} and year = #{year}
     </delete>
 
     <select id="studentTakes" parameterType="string" resultType="Takes">
         select * from takes where ID= #{ID}
     </select>
 
+    <insert id="selectSection">
+        insert into takes (ID, course_id, sec_id, semester, year) values (#{sid}, #{cid}, #{sec_id}, #{semester}, #{year});
+    </insert>
 
+    <select id="get" resultType="Takes">
+        SELECT ID, course_id, sec_id, semester, year, grade from takes where ID=#{sid} and course_id=#{cid} and sec_id=#{sec_id} and semester = #{semester} and year=#{year}
+    </select>
 </mapper>

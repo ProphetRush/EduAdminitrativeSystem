@@ -1,8 +1,10 @@
 package util;
 
+import com.alibaba.fastjson.JSON;
+
 public class Resp {
     private String status;
-    private String massage;
+    private String message;
     private Object data;
 
     public String getStatus() {
@@ -13,12 +15,12 @@ public class Resp {
         this.status = status;
     }
 
-    public String getMassage() {
-        return massage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMassage(String massage) {
-        this.massage = massage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Object getData() {
@@ -26,7 +28,29 @@ public class Resp {
     }
 
     public void setData(Object data) {
-        this.setStatus("success");
+        this.status = "success";
         this.data = data;
     }
+
+    public void setData(Object data, String msg) {
+        this.status = "success";
+        this.data = data;
+        this.message = msg;
+    }
+
+    public void setFailed(Exception e){
+        this.setStatus("Failed");
+        this.setMessage(e.getCause().toString());
+    }
+
+
+    public void setFailed(String msg){
+        this.setStatus("Failed");
+        this.setMessage(msg);
+    }
+
+    public String toJSON(){
+        return JSON.toJSONString(this);
+    }
+
 }

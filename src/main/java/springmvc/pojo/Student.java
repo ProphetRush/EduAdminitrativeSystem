@@ -5,6 +5,8 @@ public class Student {
     private String name;
     private String dept_name;
     private int tot_cred;
+    private int credit_left;
+
 
     public String getID() {
         return ID;
@@ -36,5 +38,13 @@ public class Student {
 
     public void setTot_cred(int tot_cred) {
         this.tot_cred = tot_cred;
+    }
+
+    public int getCredit_left() {
+        return credit_left;
+    }
+
+    public void setCredit_left(int credit_left) {
+        this.credit_left = credit_left;
     }
 }

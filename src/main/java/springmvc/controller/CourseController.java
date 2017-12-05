@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import springmvc.pojo.Course;
+import springmvc.pojo.Section;
+import springmvc.pojo.Student;
 import springmvc.service.CourseService;
 import springmvc.service.InstructorService;
 import springmvc.service.SectionService;
+import springmvc.service.StudentService;
 import util.Page;
 import util.Resp;
 
@@ -28,7 +31,8 @@ public class CourseController {
     SectionService sectionService;
     @Autowired
     InstructorService instructorService;
-
+    @Autowired
+    StudentService studentService;
 
 //    @RequestMapping("/listCourse")
 //    public ModelAndView listCourse(){
@@ -50,11 +54,10 @@ public class CourseController {
         try{
             List<Course> courses= courseService.queryCourse(course_id, title, dept_name, credit);
             resp.setData(courses);
-            return JSON.toJSONString(resp);
+            return resp.toJSON();
         }catch (Exception e){
-            resp.setStatus("Failed");
-            resp.setMassage(e.toString());
-            return  JSONArray.toJSONString(resp);
+            resp.setFailed(e);
+            return resp.toJSON();
         }
 
 //        int total = (int) new PageInfo<>(courses).getTotal();
@@ -71,29 +74,25 @@ public class CourseController {
         try{
             List<Course> courses = courseService.queryCourse("", "", "", -631607793);
             resp.setData(courses);
-            return JSON.toJSONString(resp);
+            return resp.toJSON();
         }catch (Exception e){
-            resp.setStatus("Failed");
-            resp.setMassage(e.toString());
-            return JSON.toJSONString(resp);
+            resp.setFailed(e);
+            return resp.toJSON();
         }
 
 
     }
 
-    @RequestMapping("/autoAddCourse")
-    public @ResponseBody Resp autoAddCourse(int count){
-
+    @RequestMapping("/autoAddSections")
+    public @ResponseBody String autoAddCourse(int count){
+        Resp resp = new Resp();
         try{
-            courseService.AutoAddCourse(count);
-            Resp resp = new Resp();
-            resp.setStatus("Success");
-            return resp;
+            List<Section> sectionsAdded = sectionService.AutoAddSections(count);
+            resp.setData(sectionsAdded);
+            return resp.toJSON();
         }catch (Exception e){
-            Resp resp = new Resp();
-            resp.setStatus("Failed");
-            resp.setMassage(e.toString());
-            return resp;
+            resp.setFailed(e);
+            return resp.toJSON();
         }
 
     }

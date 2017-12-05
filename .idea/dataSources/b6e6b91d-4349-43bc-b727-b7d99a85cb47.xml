@@ -271,57 +271,61 @@ room_number</RefColNames>
       <Position>4</Position>
       <DataType>decimal(3)|0</DataType>
     </column>
-    <index id="70" parent="18" name="dept_name">
+    <column id="70" parent="18" name="credit_left">
+      <Position>5</Position>
+      <DataType>decimal(3)|0</DataType>
+    </column>
+    <index id="71" parent="18" name="dept_name">
       <ColNames>dept_name</ColNames>
     </index>
-    <key id="71" parent="18" name="PRIMARY">
+    <key id="72" parent="18" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="72" parent="18" name="student_ibfk_1">
+    <foreign-key id="73" parent="18" name="student_ibfk_1">
       <ColNames>dept_name</ColNames>
       <RefSchemaName>university</RefSchemaName>
       <RefTableName>department</RefTableName>
       <RefColNames>dept_name</RefColNames>
       <OnDelete>set-null</OnDelete>
     </foreign-key>
-    <column id="73" parent="19" name="ID">
+    <column id="74" parent="19" name="ID">
       <Position>1</Position>
       <DataType>varchar(5)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="74" parent="19" name="course_id">
+    <column id="75" parent="19" name="course_id">
       <Position>2</Position>
       <DataType>varchar(8)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="75" parent="19" name="sec_id">
+    <column id="76" parent="19" name="sec_id">
       <Position>3</Position>
       <DataType>varchar(8)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="76" parent="19" name="semester">
+    <column id="77" parent="19" name="semester">
       <Position>4</Position>
       <DataType>varchar(6)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="77" parent="19" name="year">
+    <column id="78" parent="19" name="year">
       <Position>5</Position>
       <DataType>decimal(4)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="78" parent="19" name="grade">
+    <column id="79" parent="19" name="grade">
       <Position>6</Position>
       <DataType>varchar(2)|0</DataType>
     </column>
-    <index id="79" parent="19" name="course_id">
+    <index id="80" parent="19" name="course_id">
       <ColNames>course_id
 sec_id
 semester
 year</ColNames>
     </index>
-    <key id="80" parent="19" name="PRIMARY">
+    <key id="81" parent="19" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID
 course_id
@@ -330,14 +334,14 @@ semester
 year</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="81" parent="19" name="takes_ibfk_2">
+    <foreign-key id="82" parent="19" name="takes_ibfk_2">
       <ColNames>ID</ColNames>
       <RefSchemaName>university</RefSchemaName>
       <RefTableName>student</RefTableName>
       <RefColNames>ID</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="82" parent="19" name="takes_ibfk_1">
+    <foreign-key id="83" parent="19" name="takes_ibfk_1">
       <ColNames>course_id
 sec_id
 semester

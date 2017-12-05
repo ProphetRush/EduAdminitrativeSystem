@@ -11,11 +11,11 @@ public class Takes {
   private String grade;
 
 
-  public String getId() {
+  public String getID() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setID(String id) {
     this.id = id;
   }
 

@@ -10,5 +10,5 @@ public interface CourseService {
     Course getCourse(String course_id);
     List<Course> queryCourse(String course_id, String title, String dept_name, int credits);
     List<String>  getAllCoursesID();
-    void AutoAddCourse(int count);
+
 }

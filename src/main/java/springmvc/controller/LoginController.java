@@ -50,7 +50,7 @@ public class LoginController {
             session.setAttribute("stuID", stuId);
             session.setAttribute("stuName", stuName);
             if(session.getAttribute("goto") == null || session.getAttribute("goto").toString().toLowerCase().contains("login"))
-                return new ModelAndView("redirect:/manageCourse");
+                return new ModelAndView("redirect:/takenSections");
             else return new ModelAndView("redirect:"+session.getAttribute("goto").toString());
         }else{
             mav.addObject("info", "Wrong ID or Name!");

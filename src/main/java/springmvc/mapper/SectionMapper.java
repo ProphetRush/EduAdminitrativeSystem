@@ -11,5 +11,6 @@ public interface SectionMapper {
     public List<String> getAllRoomNumbers();
     public List<String> getRoomNumberByBuilding(String building);
     public int getSecIDByCourse(String course_id);
+    public void AddSection(Section section);
 
 }

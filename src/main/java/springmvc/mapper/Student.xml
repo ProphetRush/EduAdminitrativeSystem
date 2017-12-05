@@ -17,7 +17,11 @@
     </select>
 
     <update id="update" parameterType="Student" >
-        update student set name=#{name}, dept_name=#{dept_name}, tot_cred=#{tot_cred} where ID=#{ID}
+        update student set name=#{name}, dept_name=#{dept_name}, tot_cred=#{tot_cred}, credit_left=#{credit_left} where ID=#{ID}
     </update>
+
+    <select id="getAllStudents" resultType="Student">
+        select * from student;
+    </select>
 
 </mapper>

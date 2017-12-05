@@ -40,26 +40,5 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.getAllCoursesID();
     }
 
-    @Override
-    public void AutoAddCourse(int count) {
-        String[] coursesID = courseMapper.getAllCoursesID().toArray(new String[200]);
-        String[] semesters = {"Spring", "Fall"};
-        int year = 2018;
-        String[] buildings = {"Alumni", "Bronfman", "Chandler", "Drown", "Fairchild", "Garfield", "Gates", "Grace", "Lambeau", "Lamberton", "Main",
-        "Nassau", "Painter", "Polya", "Power", "Rathbone", "Saucon", "Stabler", "Taylor", "Whitman"};
-        String[] time_slot_ids = {"A", "B", "C", "D", "E", "F", "G", "H"};
-//        String[] room_numbers = sectionMapper.getAllRoomNumbers().toArray(new String[30]);
-//        String[] instructor_ids = instructorMapper.getAllInstructorID().toArray(new String[50]);
-        for (int i = 0; i < count; i++) {
-            String cid = coursesID[(int)(Math.random()*coursesID.length)];
-            List<String> ins = instructorMapper.getAllInstructorIDByDept(courseMapper.getDeptNameByCourseID(cid));
-            String[] instructor_ids = ins.toArray(new String[ins.size()]);
-            String building = buildings[(int)(Math.random()*buildings.length)];
-            List<String> rn = sectionMapper.getRoomNumberByBuilding(building);
-            String[] room_number = rn.toArray(new String[rn.size()]);
-            courseMapper.AddCourse(cid, (sectionMapper.getSecIDByCourse(cid)+1)+"", semesters[(int)(Math.random()*2)],
-                    year, building, room_number[(int)(Math.random()*room_number.length)], time_slot_ids[(int)(Math.random()*time_slot_ids.length)],
-                    instructor_ids[(int)(Math.random()*instructor_ids.length)]);
-        }
-    }
+
 }

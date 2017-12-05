@@ -11,7 +11,7 @@
 
 
     <select id="querySection" parameterType="string" resultType="Section">
-        SELECT c.course_id, c.title, c.dept_name, c.credits, s.semester, s.building, s.room_number, s.time_slot_id, s.instructor_id FROM course c join section s on c.course_id = s.course_id
+        SELECT c.course_id, c.title, c.dept_name, c.credits, s.semester, s.building, s.room_number, s.time_slot_id, s.instructor_id, s.year, s.sec_id FROM course c join section s on c.course_id = s.course_id
         <where>
             <if test="course_id != ''">
                 and c.course_id= #{course_id}
@@ -25,7 +25,7 @@
             <if test="credits != -631607793">
                 and c.credits = #{credits}
             </if>
-            <if test="instructor_id != ''">
+            <if test="instructor_id != '' and instructor_id != null">
                 and s.instructor_id = #{instructor_id}
             </if>
             <if test="time != ''">
@@ -48,4 +48,8 @@
     <select id="getSecIDByCourse" resultType="int">
         SELECT count(*) from section WHERE  course_id = #{course_id}
     </select>
+
+    <insert id="AddSection" parameterType="Section">
+        INSERT INTO section VALUES (#{course_id}, #{sec_id}, #{semester}, #{year}, #{building}, #{room_number}, #{time_slot_id}, #{instructor_id})
+    </insert>
 </mapper>

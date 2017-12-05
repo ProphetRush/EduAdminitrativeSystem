@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="autoAddCourse">
+    <form action="autoAddSections">
         Count:<input type="text" name="count" value="">
         <input type="submit" value="Add">
     </form>

@@ -11,4 +11,5 @@ public interface SectionService {
     List<String> getAllRoomNumbers();
     List<String> getRoomNumberByBuilding(String building);
     int getSecIDByCourse(String course_id);
+    List<Section> AutoAddSections(int count);
 }

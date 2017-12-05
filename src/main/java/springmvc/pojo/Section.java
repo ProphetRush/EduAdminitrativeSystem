@@ -7,11 +7,25 @@ public class Section {
     private int year;
     private String building;
     private String room_number;
-    private String timeSlotId;
     private String instructor_id;
     private String dept_name;
     private String title;
     private String instructor_name;
+
+    public Section(String course_id, String sec_id, String semester, int year, String building, String room_number, String time_slot_id, String instructor_id) {
+        this.course_id = course_id;
+        this.sec_id = sec_id;
+        this.semester = semester;
+        this.year = year;
+        this.building = building;
+        this.room_number = room_number;
+        this.time_slot_id = time_slot_id;
+        this.instructor_id = instructor_id;
+    }
+
+    public Section(){
+
+    }
 
     public String getDept_name() {
         return dept_name;
@@ -126,11 +140,5 @@ public class Section {
         this.room_number = room_number;
     }
 
-    public String getTimeSlotId() {
-        return timeSlotId;
-    }
 
-    public void setTimeSlotId(String timeSlotId) {
-        this.timeSlotId = timeSlotId;
-    }
 }
