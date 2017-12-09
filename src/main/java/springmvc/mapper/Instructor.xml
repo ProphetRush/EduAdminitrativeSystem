@@ -17,4 +17,8 @@
     <select id="getAllInstructorIDByDept" resultType="string">
         SELECT ID from instructor where dept_name=#{dept_name}
     </select>
+
+    <select id="getAllInstructorID" resultType="string">
+        select ID from instructor;
+    </select>
 </mapper>

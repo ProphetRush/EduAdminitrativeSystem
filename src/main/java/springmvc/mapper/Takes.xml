@@ -23,4 +23,26 @@
     <select id="get" resultType="Takes">
         SELECT ID, course_id, sec_id, semester, year, grade from takes where ID=#{sid} and course_id=#{cid} and sec_id=#{sec_id} and semester = #{semester} and year=#{year}
     </select>
+
+    <select id="getSelectedCourseID" resultType="string">
+        SELECT course_id from takes where ID=#{stuID}
+    </select>
+
+    <select id="getSelectedCount" parameterType="Section" resultType="int">
+        SELECT count(*) from takes where course_id=#{course_id} and sec_id=#{sec_id} and semester=#{semester} and year=#{year}
+    </select>
+
+    <select id="getCapacity" resultType="int">
+        SELECT capacity from classroom WHERE building=#{building} and room_number=#{room_number}
+    </select>
+
+    <select id="getStuGrades" resultType="hashmap">
+        SELECT c.title, t.grade from takes as t join course as c where t.ID=#{stuID} and t.course_id=c.course_id
+    </select>
+
+    <select id="getStuGradesByTerms" resultType="hashmap">
+        SELECT c.title, t.grade from takes as t join course as c where t.ID=#{stuID} and t.course_id=c.course_id and t.year = #{year} and t.semester=#{semester}
+    </select>
+
 </mapper>
+

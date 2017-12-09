@@ -1,6 +1,7 @@
 package springmvc.mapper;
 import org.apache.ibatis.annotations.Param;
 import springmvc.pojo.Course;
+import springmvc.pojo.Prereq;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ public interface CourseMapper {
     public int count();
     public List<Course> query(@Param("course_id") String course_id, @Param("title") String title, @Param("dept_name") String dept_name, @Param("credits") int credits);
     public List<String> getAllCoursesID();
-
+    public String getPrereqID(String course_id);
     public String getDeptNameByCourseID(String course_id);
 }

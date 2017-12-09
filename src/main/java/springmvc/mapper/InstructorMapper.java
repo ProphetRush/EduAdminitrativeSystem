@@ -13,4 +13,5 @@ public interface InstructorMapper {
     public int count();
     public String getInstructorID(String instructor_name);
     public List<String> getAllInstructorIDByDept(String dept_name);
+    public List<String> getAllInstructorID();
 }

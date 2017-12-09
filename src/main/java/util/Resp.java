@@ -49,6 +49,12 @@ public class Resp {
         this.setMessage(msg);
     }
 
+    public void setFailed(Exception e, String msg){
+        this.setStatus("Failed");
+        this.setMessage(msg);
+        this.data = e.getCause().toString();
+    }
+
     public String toJSON(){
         return JSON.toJSONString(this);
     }

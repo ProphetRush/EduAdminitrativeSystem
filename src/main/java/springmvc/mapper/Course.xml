@@ -47,6 +47,10 @@
     <select id="getAllCoursesID" resultType="string">
         SELECT course_id from course
     </select>
+    
+    <select id="getPrereqID" resultType="string">
+        SELECT prereq_id from prereq where course_id = #{course_id}
+    </select>
 
 
 

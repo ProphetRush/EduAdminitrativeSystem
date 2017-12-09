@@ -1,5 +1,8 @@
 package springmvc.controller;
 
+import annotations.Permission_Instructor;
+import annotations.Permission_Root;
+import annotations.Permission_Student;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
@@ -43,8 +46,11 @@ public class CourseController {
 //        return mav;
 //    }
 
+    @Permission_Student
+    @Permission_Instructor
+    @Permission_Root
     @RequestMapping("/getCourse")
-    public @ResponseBody String queryCourse(String course_id, String title, String dept_name, String credits, Page page, HttpServletRequest request) {
+    public @ResponseBody String queryCourse(String course_id, String title, String dept_name, String credits) {
         Resp resp = new Resp();
         int credit;
         if(!credits.equals("")){
@@ -68,6 +74,9 @@ public class CourseController {
 //        return mav;
     }
 
+    @Permission_Student
+    @Permission_Instructor
+    @Permission_Root
     @RequestMapping("/getAllCourse")
     public @ResponseBody String getAllCourse(){
         Resp resp = new Resp();
@@ -83,19 +92,19 @@ public class CourseController {
 
     }
 
-    @RequestMapping("/autoAddSections")
-    public @ResponseBody String autoAddCourse(int count){
-        Resp resp = new Resp();
-        try{
-            List<Section> sectionsAdded = sectionService.AutoAddSections(count);
-            resp.setData(sectionsAdded);
-            return resp.toJSON();
-        }catch (Exception e){
-            resp.setFailed(e);
-            return resp.toJSON();
-        }
-
-    }
+//    @RequestMapping("/autoAddSections")
+//    public @ResponseBody String autoAddCourse(int count){
+//        Resp resp = new Resp();
+//        try{
+//            List<Section> sectionsAdded = sectionService.AutoAddSections(count);
+//            resp.setData(sectionsAdded);
+//            return resp.toJSON();
+//        }catch (Exception e){
+//            resp.setFailed(e);
+//            return resp.toJSON();
+//        }
+//
+//    }
 
 
 

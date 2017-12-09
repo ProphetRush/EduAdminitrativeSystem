@@ -13,4 +13,5 @@ public interface StudentMapper {
     public void update(Student student);
     public int count();
     public List<Student> getAllStudents();
+    public List<String> getAllStudentID();
 }

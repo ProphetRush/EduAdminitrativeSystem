@@ -1,6 +1,8 @@
 package springmvc.controller;
 
 
+import annotations.Permission_Instructor;
+import annotations.Permission_Student;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import springmvc.mapper.CourseMapper;
 import springmvc.mapper.StudentMapper;
 import springmvc.mapper.TakesMapper;
+import springmvc.mapper.UserMapper;
 import springmvc.pojo.*;
 import springmvc.service.*;
 import util.Resp;
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SectionManageController {
@@ -46,15 +51,21 @@ public class SectionManageController {
 
     @Autowired
     StudentService studentService;
+    @Autowired
+    CourseMapper courseMapper;
+    @Autowired
+    UserMapper userMapper;
 
+    @Permission_Student
     @RequestMapping("/takenSections")
     public @ResponseBody String studentTaken(HttpSession session){
         Resp resp = new Resp();
         HashMap<String, Object> result = new HashMap<>();
         try{
-            Student student = studentService.getStudent(session.getAttribute("stuID").toString());
+            String stuID = userMapper.get(session.getAttribute("userID").toString()).getGroup_id();
+            Student student = studentService.getStudent(stuID);
             result.put("Student", student);
-            List<Takes> takes = takesService.studentTakes(session.getAttribute("stuID").toString());
+            List<Takes> takes = takesService.studentTakes(stuID);
             List<Course> cs = new ArrayList<>();
             int creditSelected = 0;
             for(Takes t : takes){
@@ -77,6 +88,9 @@ public class SectionManageController {
 
     }
 
+
+    @Permission_Student
+    @Permission_Instructor
     @RequestMapping("querySections")
     public @ResponseBody String querySections(HttpSession session, String course_id, String title, String credits, String dept_name, String instructor_name, String time){
         Resp resp = new Resp();
@@ -98,11 +112,13 @@ public class SectionManageController {
         }
     }
 
-    @RequestMapping(value = "takeSection")
+    @Permission_Student
+    @RequestMapping(value = "takeSection", method = RequestMethod.POST)
     public @ResponseBody String takeSection(HttpSession session, String course_id, String sec_id, String semester, String yr){
         Resp resp = new Resp();
         HashMap<String, Object> result = new HashMap<>();
         int year;
+        String stuID = userMapper.get(session.getAttribute("userID").toString()).getGroup_id();
         if(yr == null || yr.equals("")) year=2018;
         else year = Integer.parseInt(yr);
         try {
@@ -110,65 +126,87 @@ public class SectionManageController {
                 resp.setFailed("You can only take section in 2018!");
                 return JSON.toJSONString(resp);
             }
+            String PrereqID = courseMapper.getPrereqID(course_id);
             Section section = sectionService.getSection(course_id, sec_id, semester, year);
-            if(studentService.getStudent(session.getAttribute("stuID").toString()).getCredit_left() < courseService.getCourse(course_id).getCredits()){
-                resp.setFailed("Your credit is not enough!");
-                return resp.toJSON();
+            if(PrereqID == null||takesMapper.getSelectedCourseID(stuID).contains(PrereqID)){
+                if(studentService.getStudent(stuID).getCredit_left() < courseService.getCourse(course_id).getCredits()){
+                    resp.setFailed("Your credit is not enough!");
+                    return resp.toJSON();
+                }
+                if(!takesService.isCapacityEnough(section)){
+                    resp.setFailed("This section is full, please select another section!");
+                    return resp.toJSON();
+                }
+                takesService.selectSection(stuID, course_id, sec_id, semester, year);
+                result.put("Student", studentService.getStudent(stuID));
+                result.put("sectionSelected", section);
+                result.put("isSelectSuccess", takesService.isSelected(stuID, course_id, sec_id, semester, year));
+                resp.setData(result);
+                return JSON.toJSONString(resp);
+            }else {
+                resp.setFailed("You have not take the pre-required course: "+ courseService.getCourse(PrereqID).getTitle() + ", Please take this course first!");
+                return JSON.toJSONString(resp);
             }
-            takesService.selectSection(session.getAttribute("stuID").toString(), course_id, sec_id, semester, year);
-            result.put("Student", studentService.getStudent(session.getAttribute("stuID").toString()));
-            result.put("sectionSelected", section);
-            result.put("isSelectSuccess", takesService.isSelected(session.getAttribute("stuID").toString(), course_id, sec_id, semester, year));
-            resp.setData(result);
-            return JSON.toJSONString(resp);
+
         }catch (Exception e){
             resp.setFailed(e);
             return JSON.toJSONString(resp);
         }
     }
 
-    @RequestMapping("deleteTakenSection")
+    @Permission_Student
+    @RequestMapping(value = "deleteTakenSection", method = RequestMethod.POST)
     public @ResponseBody String deleteTakenSection(HttpSession session, String course_id, String sec_id, String semester, String yr){
         Resp resp = new Resp();
-        Takes takes = takesService.get(session.getAttribute("stuID").toString(), course_id, sec_id, semester, Integer.parseInt(yr));
-        if(takes.getGrade()==null){
-            try{
+        try{
+            String stuID = userMapper.get(session.getAttribute("userID").toString()).getGroup_id();
+            Takes takes = takesService.get(stuID, course_id, sec_id, semester, Integer.parseInt(yr));
+            if(takes.getGrade()==null){
                 takesMapper.delete(takes);
                 resp.setData(takes, "Successfully remove this taken section!");
                 return resp.toJSON();
-            }catch(Exception e){
-                resp.setFailed(e);
+            }else{
+                resp.setFailed("You can't remove a section which have already finished!");
                 return resp.toJSON();
             }
-        }else{
-            resp.setFailed("You can remove a section which have already finished!");
+        }catch(Exception e){
+            resp.setFailed(e);
+            return resp.toJSON();
+        }
+
+
+    }
+
+    @Permission_Student
+    @RequestMapping("getGrades")
+    public @ResponseBody String getStuGrades(HttpSession session){
+        Resp resp = new Resp();
+        String stuID = userMapper.get(session.getAttribute("userID").toString()).getGroup_id();
+        try{
+            List<HashMap<String, String>> grades = takesMapper.getStuGrades(stuID);
+            resp.setData(grades);
+            return resp.toJSON();
+        }catch(Exception e){
+            resp.setFailed(e);
+            return resp.toJSON();
+        }
+    }
+
+    @Permission_Student
+    @RequestMapping("getGradesByTerms")
+    public @ResponseBody String getGradesByTerms(HttpSession session, String year, String semester){
+        Resp resp = new Resp();
+        String stuID = userMapper.get(session.getAttribute("userID").toString()).getGroup_id();
+        try{
+            List<HashMap<String, String>> grades = takesMapper.getStuGradesByTerms(stuID, year, semester);
+            resp.setData(grades);
+            return resp.toJSON();
+        }catch(Exception e){
+            resp.setFailed(e);
             return resp.toJSON();
         }
     }
 
 
-//    @RequestMapping("/initCreditLeft")
-//    public @ResponseBody String initCreditLeft(){
-//        Resp resp = new Resp();
-//        try{
-//            List<Student> students = studentMapper.getAllStudents();
-//            for(Student stu: students) {
-//                int credit_used = 0;
-//                List<Takes> takes = takesService.studentTakes(stu.getID());
-//                for(Takes t: takes){
-//                    credit_used += courseService.getCourse(t.getCourse_id()).getCredits();
-//                }
-//                if(stu.getTot_cred()-credit_used>0) stu.setCredit_left(stu.getTot_cred()-credit_used);
-//                else stu.setCredit_left(0);
-//                studentMapper.update(stu);
-//            }
-//            resp.setMassage("Successfully update credit_left field of student table!");
-//            resp.setStatus("Success");
-//            return resp.toJSON();
-//
-//        }catch (Exception e){
-//            resp.setFailed(e);
-//            return resp.toJSON();
-//        }
-//    }
+
 }
