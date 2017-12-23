@@ -49,5 +49,11 @@
 
         </mvc:interceptor>
 
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="springmvc.interceptor.CrossOriginInterceptor"/>
+
+        </mvc:interceptor>
+
     </mvc:interceptors>
 </beans>

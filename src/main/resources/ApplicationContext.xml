@@ -51,4 +51,7 @@
         <property name="basePackage" value="springmvc.mapper"/>
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+
 </beans>

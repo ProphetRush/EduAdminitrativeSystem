@@ -21,4 +21,8 @@
     <select id="getAllInstructorID" resultType="string">
         select ID from instructor;
     </select>
+
+    <select id="getAllInstructors" resultType="Instructor">
+        select * from instructor;
+    </select>
 </mapper>

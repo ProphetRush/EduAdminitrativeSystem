@@ -10,4 +10,5 @@ public interface UserMapper {
     public void initUsers(List<User> users);
     public User getUser(@Param("gid") String id, @Param("ug") String user_group);
     public User get(String id);
+    public void update(User user);
 }

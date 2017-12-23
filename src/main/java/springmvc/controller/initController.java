@@ -1,15 +1,14 @@
 package springmvc.controller;
 
+import annotations.Permission_All;
 import annotations.Permission_Root;
+import annotations.Permission_Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import springmvc.mapper.*;
-import springmvc.pojo.Section;
-import springmvc.pojo.Student;
-import springmvc.pojo.Takes;
-import springmvc.pojo.User;
+import springmvc.pojo.*;
 import springmvc.service.*;
 import util.Resp;
 
@@ -96,15 +95,15 @@ public class initController {
     public @ResponseBody String initUsers(){
         Resp resp = new Resp();
         try{
-            List<String> students = studentMapper.getAllStudentID();
+            List<Student> students = studentMapper.getAllStudents();
             List<User> users = new ArrayList<>();
-            for(String s: students){
-                User stu = new User(s, "Student");
+            for(Student s: students){
+                User stu = new User(s);
                 users.add(stu);
             }
-            List<String> instructors = instructorMapper.getAllInstructorID();
-            for(String s: instructors){
-                User ins = new User(s, "Instructor");
+            List<Instructor> instructors = instructorMapper.getAllInstructors();
+            for(Instructor s: instructors){
+                User ins = new User(s);
                 users.add(ins);
             }
             userMapper.initUsers(users);
@@ -115,6 +114,8 @@ public class initController {
             return resp.toJSON();
         }
     }
+
+
 
     //    @RequestMapping("/initCreditLeft")
 //    public @ResponseBody String initCreditLeft(){

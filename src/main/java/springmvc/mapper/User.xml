@@ -6,9 +6,9 @@
 <mapper namespace="springmvc.mapper.UserMapper">
 
     <insert id="initUsers" parameterType="java.util.List">
-        INSERT INTO user (ID, group_id, user_group, password) VALUES 
+        INSERT INTO user (ID, group_id, user_group, password, username) VALUES
             <foreach collection="list" item="item" index="index" separator=",">
-                (#{item.id}, #{item.group_id}, #{item.user_group}, #{item.password})
+                (#{item.id}, #{item.group_id}, #{item.user_group}, #{item.password}, #{item.username})
             </foreach>
     </insert>
 
@@ -19,4 +19,8 @@
     <select id="get" resultType="User">
         SELECT * FROM user WHERE ID=#{id} limit 0,1
     </select>
+
+    <update id="update" parameterType="User">
+        UPDATE user set group_id=#{group_id}, user_group=#{user_group}, password=#{password}, username=#{username} where ID=#{id}
+    </update>
 </mapper>

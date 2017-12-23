@@ -14,4 +14,5 @@ public interface InstructorMapper {
     public String getInstructorID(String instructor_name);
     public List<String> getAllInstructorIDByDept(String dept_name);
     public List<String> getAllInstructorID();
+    public List<Instructor> getAllInstructors();
 }
