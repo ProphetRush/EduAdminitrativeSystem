@@ -152,6 +152,13 @@ public class SectionManageController {
                         resp.setFailed("This section is full, please select another section!");
                         return resp.toJSON();
                     }
+                    List<HashMap<String, String>> sectionsTaken = takesMapper.getSectionsTaken(stuID);
+                    for (HashMap<String, String> m: sectionsTaken) {
+                        if(m.get("time_slot_id").equals(section.getTime_slot_id())){
+                            resp.setFailed("You can't take this section because you've take another section in the same time slot!");
+                            return resp.toJSON();
+                        }
+                    }
                     takesService.selectSection(stuID, course_id, sec_id, semester, year);
                     student.setCredit_left(student.getCredit_left()-courseService.getCourse(section.getCourse_id()).getCredits());
                     studentMapper.update(student);

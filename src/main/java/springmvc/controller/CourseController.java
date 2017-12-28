@@ -48,6 +48,7 @@ public class CourseController {
 //        return mav;
 //    }
 
+    @CrossOrigin
     @Permission_Student
     @Permission_Instructor
     @Permission_Root

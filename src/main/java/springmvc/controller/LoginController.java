@@ -177,4 +177,50 @@ public class LoginController {
             return resp.toJSON();
         }
     }
+
+    @CrossOrigin
+    @Permission_Student
+    @Permission_Root
+    @Permission_Instructor
+    @RequestMapping("getProfile")
+    public @ResponseBody String getProfile(HttpSession session){
+        Resp resp = new Resp();
+        try{
+            User user = userMapper.get(session.getAttribute("userID").toString());
+            if(user.getUser_group().equals("Student")){
+                resp.setData(userMapper.getStudentProfile(user.getGroup_id()));
+                return resp.toJSON();
+            }
+            return "";
+            //To be Continue...
+        }catch (Exception e){
+            resp.setFailed("Unknown Error! Please try again!");
+            return resp.toJSON();
+        }
+    }
+
+    @CrossOrigin
+    @Permission_Student
+    @Permission_Root
+    @Permission_Instructor
+    @RequestMapping(value = "updateProfile", method = RequestMethod.POST)
+    public @ResponseBody String getProfile(HttpSession session, String username, String email, String phone){
+        Resp resp = new Resp();
+        try{
+            User user = userMapper.get(session.getAttribute("userID").toString());
+            if(user.getUser_group().equals("Student")){
+                user.setUsername(username);
+                if(!email.equals("")) user.setEmail(email);
+                if(!phone.equals("")) user.setPhone(phone);
+                userMapper.update(user);
+                resp.setStatus("success");
+                return resp.toJSON();
+            }
+            return "";
+            //To be Continue...
+        }catch (Exception e){
+            resp.setFailed("Unknown Error! Please try again!");
+            return resp.toJSON();
+        }
+    }
 }

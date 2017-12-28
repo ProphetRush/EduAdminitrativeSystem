@@ -28,6 +28,7 @@
         SELECT course_id from takes where ID=#{stuID}
     </select>
 
+
     <select id="getSelectedCount" parameterType="Section" resultType="int">
         SELECT count(*) from takes where course_id=#{course_id} and sec_id=#{sec_id} and semester=#{semester} and year=#{year}
     </select>

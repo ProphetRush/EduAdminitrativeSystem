@@ -3,6 +3,7 @@ package springmvc.mapper;
 import org.apache.ibatis.annotations.Param;
 import springmvc.pojo.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface UserMapper {
@@ -11,4 +12,5 @@ public interface UserMapper {
     public User getUser(@Param("gid") String id, @Param("ug") String user_group);
     public User get(String id);
     public void update(User user);
+    public List<HashMap<String, String>> getStudentProfile(String stuID);
 }
