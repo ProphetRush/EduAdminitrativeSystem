@@ -28,4 +28,8 @@
         SELECT ID from student;
     </select>
 
+    <select id="getLeftCredits" resultType="string">
+        SELECT credit_left from student where ID=#{stuID}
+    </select>
+
 </mapper>

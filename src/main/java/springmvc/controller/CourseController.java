@@ -1,5 +1,6 @@
 package springmvc.controller;
 
+import annotations.CrossOrigin;
 import annotations.Permission_Instructor;
 import annotations.Permission_Root;
 import annotations.Permission_Student;
@@ -23,6 +24,7 @@ import util.Page;
 import util.Resp;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -91,6 +93,9 @@ public class CourseController {
 
 
     }
+
+
+
 
 //    @RequestMapping("/autoAddSections")
 //    public @ResponseBody String autoAddCourse(int count){

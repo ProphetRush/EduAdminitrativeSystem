@@ -10,29 +10,39 @@
     </select>
 
 
-    <select id="querySection" parameterType="string" resultType="Section">
-        SELECT c.course_id, c.title, c.dept_name, c.credits, s.semester, s.building, s.room_number, s.time_slot_id, s.instructor_id, s.year, s.sec_id FROM course c join section s on c.course_id = s.course_id
+    <select id="querySection" parameterType="string" resultType="hashmap">
+        SELECT c.course_id, c.title, c.dept_name, c.credits, s.semester, s.building, s.room_number, s.time_slot_id, s.year, i.name as instructor,
+        cp.title as prereq_title, r.capacity , (select count(*) from takes t where t.course_id=s.course_id and t.sec_id=s.sec_id and t.semester=s.semester and t.year=s.year)
+        as selected, s.sec_id from course c join section s on c.course_id = s.course_id join instructor i on i.ID=s.instructor_id
+        left join prereq p on p.course_id = s.course_id left join course cp on cp.course_id=p.prereq_id join classroom r on r.building = s.building
+        and r.room_number = s.room_number
         <where>
-            <if test="course_id != ''">
-                and c.course_id= #{course_id}
+            <if test="course_id != '' and course_id != null">
+                and s.course_id= #{course_id}
             </if>
-            <if test="title != ''">
+            <if test="title != '' and title != null">
                 and c.title like concat('%', #{title}, '%')
             </if>
-            <if test="dept_name != ''">
+            <if test="semester != '' and semester != null">
+                and s.semester= #{semester}
+            </if>
+            <if test="year != '' and year != null">
+                and s.year= #{year}
+            </if>
+            <if test="dept_name != '' and dept_name != null">
                 and c.dept_name = #{dept_name}
             </if>
-            <if test="credits != -631607793">
+            <if test="credits != '' and credits != null">
                 and c.credits = #{credits}
             </if>
-            <if test="instructor_id != '' and instructor_id != null">
-                and s.instructor_id = #{instructor_id}
+            <if test="instructor_name != '' and instructor_name != null">
+                and i.name = #{instructor_name}
             </if>
-            <if test="time != ''">
+            <if test="time != '' and time != null">
                 and s.time_slot_id = #{time}
             </if>
-            <if test="course_id == '' and title == '' and dept_name == '' and credits == -631607793 and instructor_id == '' and time == ''">
-                and s.course_id>1
+            <if test="prereq != '' and prereq != null">
+                and cp.title= #{prereq}
             </if>
         </where>
     </select>

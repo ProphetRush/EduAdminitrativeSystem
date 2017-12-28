@@ -37,11 +37,26 @@
     </select>
 
     <select id="getStuGrades" resultType="hashmap">
-        SELECT c.title, t.grade from takes as t join course as c where t.ID=#{stuID} and t.course_id=c.course_id
+        SELECT t.year, t.semester, t.course_id, c.title, i.name, c.credits, t.grade from takes as t join course as c join section as s join instructor as i where t.ID=#{stuID} and t.course_id=c.course_id
+              and t.course_id=s.course_id and t.sec_id=s.sec_id and t.semester=s.semester and t.year=s.year and i.ID=s.instructor_id and t.year&lt;2018
     </select>
 
     <select id="getStuGradesByTerms" resultType="hashmap">
-        SELECT c.title, t.grade from takes as t join course as c where t.ID=#{stuID} and t.course_id=c.course_id and t.year = #{year} and t.semester=#{semester}
+
+        SELECT t.year, t.semester, t.course_id, c.title, i.name, c.credits, t.grade from takes as t join course as c join section as s join instructor as i where t.ID=#{stuID} and t.course_id=c.course_id
+        <if test="semester != ''">
+            and t.semester=#{semester}
+        </if>
+        <if test="year != ''">
+            and t.year = #{year}
+        </if>
+                and t.course_id=s.course_id and t.sec_id=s.sec_id and t.semester=s.semester and t.year=s.year and i.ID=s.instructor_id
+    </select>
+
+    <select id="getSectionsTaken" resultType="hashmap">
+        select t.ID, t.course_id, c.title, i.name as instructor, c.dept_name, c.credits, s.time_slot_id, s.building, s.room_number, s.sec_id, s.semester, s.year
+        from takes t join course c on t.course_id=c.course_id join section s on t.course_id=s.course_id and t.sec_id=s.sec_id and t.semester=s.semester and t.year=s.year
+        join instructor i on s.instructor_id=i.ID where t.ID=10076 and t.year=2018
     </select>
 
 </mapper>

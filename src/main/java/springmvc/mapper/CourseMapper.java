@@ -16,4 +16,5 @@ public interface CourseMapper {
     public List<String> getAllCoursesID();
     public String getPrereqID(String course_id);
     public String getDeptNameByCourseID(String course_id);
+    public List<String> getAllDept();
 }

@@ -14,4 +14,5 @@ public interface StudentMapper {
     public int count();
     public List<Student> getAllStudents();
     public List<String> getAllStudentID();
+    public String getLeftCredits(String stuID);
 }

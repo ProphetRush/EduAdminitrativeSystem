@@ -26,10 +26,7 @@ public class SectionServiceImpl implements SectionService {
         return sectionMapper.getSection(course_id, sec_id, semester, year);
     }
 
-    @Override
-    public List<Section> querySection(String course_id, String course_name, String dept_name, int credits, String instructor_id, String time) {
-        return sectionMapper.querySection(course_id, course_name, dept_name, credits, instructor_id, time);
-    }
+
 
     @Override
     public List<String> getAllRoomNumbers() {

@@ -24,4 +24,5 @@ public interface TakesMapper {
 
     public List<HashMap<String, String>> getStuGrades(String stuID);
     public List<HashMap<String, String>> getStuGradesByTerms(@Param("stuID") String stuID, @Param("year")String year, @Param("semester")String semester);
+    public List<HashMap<String, String>> getSectionsTaken(String stuID);
 }
