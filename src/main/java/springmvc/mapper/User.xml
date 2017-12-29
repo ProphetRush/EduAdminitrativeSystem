@@ -25,6 +25,6 @@
     </update>
 
     <select id="getStudentProfile" parameterType="string" resultType="hashmap">
-        SELECT u.group_id as id, u.user_group, u.username, u.email, u.phone, s.name, s.dept_name, i.name as advisor from user u join student s on u.group_id=s.ID join advisor a on s.ID=a.s_ID join instructor i on a.i_ID=i.ID where u.user_group='Student' and u.group_id=#{stuID}
+        SELECT u.group_id as id, u.user_group, u.username, u.email, u.phone, s.name, s.dept_name, s.credit_left as leftCredits,i.name as advisor from user u join student s on u.group_id=s.ID join advisor a on s.ID=a.s_ID join instructor i on a.i_ID=i.ID where u.user_group='Student' and u.group_id=#{stuID}
     </select>
 </mapper>

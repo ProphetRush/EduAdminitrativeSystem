@@ -209,7 +209,7 @@ public class LoginController {
         try{
             User user = userMapper.get(session.getAttribute("userID").toString());
             if(user.getUser_group().equals("Student")){
-                user.setUsername(username);
+                if(!username.equals("")) user.setUsername(username);
                 if(!email.equals("")) user.setEmail(email);
                 if(!phone.equals("")) user.setPhone(phone);
                 userMapper.update(user);

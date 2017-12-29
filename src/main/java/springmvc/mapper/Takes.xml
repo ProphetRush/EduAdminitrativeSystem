@@ -57,7 +57,7 @@
     <select id="getSectionsTaken" resultType="hashmap">
         select t.ID, t.course_id, c.title, i.name as instructor, c.dept_name, c.credits, s.time_slot_id, s.building, s.room_number, s.sec_id, s.semester, s.year
         from takes t join course c on t.course_id=c.course_id join section s on t.course_id=s.course_id and t.sec_id=s.sec_id and t.semester=s.semester and t.year=s.year
-        join instructor i on s.instructor_id=i.ID where t.ID=10076 and t.year=2018
+        join instructor i on s.instructor_id=i.ID where t.ID=#{stuID} and t.year=2018
     </select>
 
 </mapper>

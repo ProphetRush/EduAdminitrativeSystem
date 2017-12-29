@@ -385,7 +385,7 @@ year</RefColNames>
     </column>
     <column id="91" parent="20" name="phone">
       <Position>7</Position>
-      <DataType>int(11)|0</DataType>
+      <DataType>varchar(40)|0</DataType>
     </column>
     <key id="92" parent="20" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
